@@ -1,0 +1,8 @@
+Flask
+sqlalchemy
+sqlalchemy-serializer
+flask-sqlalchemy
+flask-migrate
+psycopg2
+python-dotenv
+flask-login
