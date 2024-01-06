@@ -1,4 +1,5 @@
 Flask
+gunicorn
 sqlalchemy
 sqlalchemy-serializer
 flask-sqlalchemy
