@@ -4,8 +4,10 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from werkzeug.security import generate_password_hash, check_password_hash
 from app_package import db
+from flask_login import UserMixin
+from app_package import login
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
                                                 unique=True)
@@ -22,7 +24,13 @@ class User(db.Model):
       self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
+      if self.password_hash is None:
+          return False
       return check_password_hash(self.password_hash, password)
+
+    @login.user_loader
+    def load_user(id):
+      return db.session.get(User, int(id))      
 
 class Post(db.Model):
   id: so.Mapped[int] = so.mapped_column(primary_key=True)

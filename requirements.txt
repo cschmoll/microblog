@@ -6,3 +6,4 @@ flask-migrate
 psycopg2
 python-dotenv
 flask-login
+email-validator
